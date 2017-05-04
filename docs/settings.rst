@@ -165,10 +165,10 @@ Project settings are opened from the ``Project > Edit Project`` menu. Here is an
             }
         }
     }
-    
+
 .. note::
 
-    Be sure you are **not** putting the ``"SublimeLinter"`` object inside the ``settings`` object. They should be sibling objects in the root document. 
+    Be sure you are **not** putting the ``"SublimeLinter"`` object inside the ``settings`` object. They should be sibling objects in the root document.
 
 Unlike user settings, project settings are not filled in by |sl|; you are responsible for adding any settings you wish to apply to files in the project.
 
@@ -387,6 +387,7 @@ Token               Value
 =================== =========================================================================
 ${sublime}          The full path to the Sublime Text packages directory
 ${project}          The full path to the project’s parent directory, if available.
+${folder}           The full path to the top folder of the current view
 ${directory}        The full path to the parent directory of the current view’s file.
 ${home}             The full path to the current user’s home directory.
 ${env:x}            The environment variable 'x'.
@@ -396,7 +397,7 @@ Please note:
 
 - Directory paths do **not** include a trailing directory separator.
 
-- ``${project}`` and ``${directory}`` expansion are dependent on a file being open in a window, and thus may not work when running lint reports.
+- ``${project}``, ``${folder}`` and ``${directory}`` expansions are dependent on a file being open in a window, and thus may not work when running lint reports.
 
 - The environment variables available to the ``${env:x}`` token are those available within the Sublime Text python context, which is a very limited subset of those available within a command line shell.
 

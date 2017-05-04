@@ -560,6 +560,10 @@ class Linter(metaclass=LinterMeta):
         window = self.view.window()
         if window:
             view = window.active_view()
+            window_vars = window.extract_variables()
+            directory = (
+                os.path.dirname(view.file_name()).replace('\\', '/') if
+                view and view.file_name() else "FILE NOT ON DISK")
 
             if window.project_file_name():
                 project = os.path.dirname(window.project_file_name()).replace('\\', '/')
@@ -571,9 +575,12 @@ class Linter(metaclass=LinterMeta):
 
             expressions.append({
                 'token': '${directory}',
-                'value': (
-                    os.path.dirname(view.file_name()).replace('\\', '/') if
-                    view and view.file_name() else "FILE NOT ON DISK")
+                'value': directory
+            })
+
+            expressions.append({
+                'token': '${folder}',
+                'value': window_vars.get('folder', None) or directory
             })
 
         expressions.append({
